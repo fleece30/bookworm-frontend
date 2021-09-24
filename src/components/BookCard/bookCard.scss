@@ -1,0 +1,100 @@
+.book-card {
+  width: 18em;
+  height: 25em;
+  display: grid;
+  grid-template-rows: 35% 0% 65%;
+  position: relative;
+  border-radius: 0.5em;
+  overflow: hidden;
+  cursor: pointer;
+  // background-color: rgb(245, 245, 245);
+  box-shadow: 0.2em 0.2em 1em #dddddd;
+  .clickableCont {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    min-height: 100%;
+    a {
+      position: absolute;
+      min-width: 100%;
+      min-height: 100%;
+    }
+  }
+  .card-header {
+    width: 100%;
+    transform: scale(1.1);
+    overflow: hidden;
+    // padding: 0 !important;
+    .img-bgs {
+      max-width: 100%;
+      filter: blur(0.4em);
+      transform: scale(1.5);
+    }
+  }
+  .book-img {
+    position: absolute;
+    height: 8em;
+    top: 7%;
+    left: 5%;
+    box-shadow: 0.2em 0.2em 0.6em black;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em;
+    row-gap: 0em;
+    h3,
+    p {
+      margin-bottom: 0;
+    }
+    .book-info {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 85%;
+      z-index: 10;
+      .author,
+      .time {
+        display: flex;
+        flex-direction: column;
+        text-transform: uppercase;
+        font-size: 12px;
+
+        span {
+          opacity: 0.6;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .book-card {
+    width: 11em;
+    height: 15.2em;
+    h5 {
+      font-size: 0.7em;
+    }
+    .book-img {
+      position: absolute;
+      height: 5em;
+      top: 7%;
+      left: 5%;
+      box-shadow: 0.2em 0.2em 0.6em black;
+    }
+    p {
+      display: none;
+    }
+
+    .card-body {
+      padding: 1.5em 1em;
+      .book-info {
+        top: 72%;
+        .author {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+}
