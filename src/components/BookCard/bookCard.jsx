@@ -7,9 +7,6 @@ export default function BookCard(props) {
   return (
     <div>
       <div className="book-card">
-        <div className="clickableCont">
-          {/* <Link to={`/book/${id}`}></Link> */}
-        </div>
         <div className="card-header">
           <img className="img-bgs" src={book_img_url} alt="awd" />
         </div>

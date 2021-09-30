@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { gql, useApolloClient } from "@apollo/client";
 import BookCard from "../../components/BookCard/bookCard";
+import { loadUserThunk } from "../../redux/user";
+import { addToCartThunk } from "../../redux/cart";
+import ReactTooltip from "react-tooltip";
 import axios from "axios";
 import "./Library.scss";
 
@@ -33,15 +36,20 @@ const SEARCH_QUERY = gql`
   }
 `;
 
-export default function Library() {
+export default function Library(props) {
   const [data, setData] = useState({});
   const [queryTags, setQueryTags] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showSearched, setshowSearched] = useState(false);
   const [books, setBooks] = useState([]);
+  const [inSaved, setInSaved] = useState(false);
+  const [btnText, setBtnText] = useState("");
+  const [isPreviewActive, setPreviewActive] = useState(false);
   const { user } = useSelector((state) => state.user);
   const id = useRef("");
+  const scrollYValue = useRef(0);
   const client = useApolloClient();
+  const dispatch = useDispatch();
 
   const genreTags = [
     "Action and Adventure",
@@ -65,6 +73,12 @@ export default function Library() {
   ];
 
   useEffect(() => {
+    if (props.location.id !== null && props.location.id !== undefined) {
+      id.current = props.location.id;
+      getBookInfo();
+      setPreviewActive(true);
+    }
+    dispatch(loadUserThunk());
     if (books.length === 0 && showSearched) return;
     try {
       client
@@ -91,52 +105,74 @@ export default function Library() {
   };
 
   const getBookInfo = () => {
+    setInSaved(false);
+    if (user && user.data.cart.some((obj) => obj._id === id.current)) {
+      setBtnText("Already in cart");
+    } else {
+      setBtnText("Add to cart");
+    }
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/books/bookInfo/${id.current}`)
       .then(({ data }) => {
         setData({ ...data });
+        if (
+          user !== undefined &&
+          user.data.savedBooks.findIndex((o) => o === data._id) !== -1
+        ) {
+          setInSaved(true);
+        }
       })
       .catch((err) => console.log(err));
   };
 
-  // function getAllBooks() {
+  const addToCart = () => {
+    dispatch(addToCartThunk({ userId: user.data._id, book: data }));
+    setBtnText("Already in cart");
+  };
 
-  //   return <div></div>;
-
-  // return (
-  //   <div className="all-books-container">
-  //     {data === undefined
-  //       ? ""
-  //       : data.books.map((item, key) => {
-  //           return (
-  //             <div
-  //               key={key}
-  //               onClick={() => {
-  //                 id.current = item._id;
-  //                 getBookInfo();
-  //               }}
-  //             >
-  //               <BookCard
-  //                 key={key}
-  //                 id={item._id}
-  //                 book_name={item.book_name}
-  //                 book_img_url={item.book_img_url}
-  //                 author={item.author}
-  //                 description={item.description}
-  //                 length={item["length"]}
-  //                 instock={item.inStock}
-  //               />
-  //             </div>
-  //           );
-  //         })}
-  //   </div>
-  // );
-  // }
+  const saveBook = () => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    if (token) {
+      config.headers["x-auth-token"] = token;
+    }
+    if (!inSaved) {
+      const userId = user.data._id;
+      axios
+        .post(
+          `${process.env.REACT_APP_BASE_URL}/api/user/addtosaved`,
+          {
+            bookId: id.current,
+            id: userId,
+          },
+          config
+        )
+        .then((res) => setInSaved(true))
+        .catch((err) => console.log(err));
+    } else {
+      const userId = user.data._id;
+      axios
+        .post(
+          `${process.env.REACT_APP_BASE_URL}/api/user/removefromsaved`,
+          {
+            bookId: id.current,
+            userId: userId,
+          },
+          config
+        )
+        .then((res) => setInSaved(false))
+        .catch((err) => console.log(err));
+    }
+  };
 
   return (
     <div>
       <h1>Browse the library</h1>
-      <div className="library">
+      <div className={`library ${isPreviewActive ? "preview-active" : ""}`}>
         <div className="items">
           <div className="searchbar">
             <input
@@ -148,10 +184,6 @@ export default function Library() {
               value={searchTerm}
             />
           </div>
-          <span>
-            Select tags to filter results by and press <i>ENTER</i> to search or{" "}
-            <i>DEL</i> to clear
-          </span>
           <div
             className="book-tags"
             style={{ display: "flex", flexWrap: "wrap" }}
@@ -175,7 +207,8 @@ export default function Library() {
           </div>
           <div style={{ display: "flex", columnGap: "2em" }}>
             <button
-              className="btn-search"
+              className="btn-search btn-main"
+              style={{ width: "10em" }}
               onClick={async (e) => {
                 try {
                   client
@@ -196,7 +229,8 @@ export default function Library() {
               Search
             </button>
             <button
-              className="btn-clear"
+              className="btn-clear btn-sec"
+              style={{ width: "10em" }}
               onClick={() => {
                 setshowSearched(false);
                 setQueryTags([]);
@@ -222,6 +256,9 @@ export default function Library() {
                     onClick={() => {
                       id.current = item._id;
                       getBookInfo();
+                      setPreviewActive(true);
+                      scrollYValue.current = window.scrollY;
+                      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
                     }}
                   >
                     <BookCard
@@ -241,7 +278,7 @@ export default function Library() {
           </div>
           {/* )} */}
         </div>
-        <div className="preview-panel">
+        <div className={`preview-panel ${isPreviewActive ? "slide" : ""}`}>
           {Object.keys(data).length === 0 ? (
             ""
           ) : (
@@ -272,6 +309,7 @@ export default function Library() {
                   <div
                     style={{
                       display: data.tags.length !== 0 ? "block" : "none",
+                      marginBottom: "1em",
                     }}
                   >
                     <h5>Tags</h5>
@@ -285,22 +323,79 @@ export default function Library() {
                       })}
                     </ul>
                   </div>
+                  <div>
+                    <h5>Borrow for</h5>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/token-icon.png`}
+                      alt=""
+                      style={{
+                        width: "1.4em",
+                        position: "relative",
+                        top: "-0.1em",
+                      }}
+                    />
+                    &nbsp;<b>{data.tokenValue}</b>
+                  </div>
                 </div>
-                <div className="image">
-                  <img
-                    src={data.book_img_url}
-                    alt="preview"
-                    id="previewImage"
-                    style={{
-                      maxWidth: "100%",
-                    }}
-                  />
+                <div>
+                  <div className="image">
+                    <img
+                      src={data.book_img_url}
+                      alt="preview"
+                      id="previewImage"
+                      style={{
+                        maxWidth: "100%",
+                      }}
+                    />
+                  </div>
+                  <div className="call-to-action">
+                    <button
+                      className="add-to-cart btn-main"
+                      onClick={() => addToCart()}
+                      disabled={btnText === "Already in cart" ? true : false}
+                    >
+                      {btnText}
+                    </button>
+                    <button
+                      className="add-to-saved btn-sec"
+                      onClick={() => saveBook()}
+                    >
+                      {inSaved ? "Remove from Wishlist" : "Add to Wishlist"}
+                    </button>
+                    <button
+                      className="add-to-saved btn-sec"
+                      onClick={() => {
+                        setPreviewActive(false);
+                        setTimeout(() => {
+                          setData([]);
+                        }, 500);
+                      }}
+                    >
+                      Close Preview
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           )}
+          <div
+            className={`go-to-location ${
+              scrollYValue.current === 0 || !isPreviewActive ? "hide" : ""
+            }`}
+            onClick={() =>
+              window.scrollTo({ top: scrollYValue.current, behavior: "smooth" })
+            }
+            data-tip
+            data-for="scroll-to-location"
+          >
+            <i className="fal fa-arrow-down fa-2x"></i>
+          </div>
         </div>
       </div>
+      <ReactTooltip id="scroll-to-location" place="top" effect="solid">
+        Scroll to your last <br />
+        browsing location
+      </ReactTooltip>
     </div>
   );
 }

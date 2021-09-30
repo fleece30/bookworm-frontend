@@ -8,16 +8,12 @@ import Login from "./containers/Login/Login";
 import AdminHome from "./containers/AdminHome/AdminHome";
 import CheckBook from "./containers/CheckBook/CheckBook";
 import Library from "./containers/Library/Library";
-// import SearchBooks from "./containers/SearchBooks/SearchBooks";
-// import Profile from "./containers/Profile/Profile";
+import Profile from "./containers/Profile/Profile";
 import DonateBook from "./containers/DonateBook/DonateBook";
 import Signup from "./containers/Signup/Signup";
-// import SingleBook from "./containers/SingleBook/SingleBook";
-// import BookByLen from "./containers/BookByLen";
-// import ActivationPage from "./containers/ActivationPage";
 // import BooksByCategory from "./containers/BooksByCategory/BooksByCategory";
 // import ResetPassword from "./containers/ResetPassword/ResetPassword";
-// import Cart from "./containers/Cart/Cart";
+import Cart from "./containers/Cart/Cart";
 
 function App() {
   const client = new ApolloClient({
@@ -38,6 +34,8 @@ function App() {
             <ProtectedRoute exact path="/adminhome" component={AdminHome} />
             <Route path="/donate" component={DonateBook} />
             <Route path="/collection" component={Library} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/profile" component={Profile} />
             <Route exact path="/checkbook/:id" component={CheckBook} />
             {/*<Route path="/search" component={SearchBooks} />
             <Route path="/profile" component={Profile} />

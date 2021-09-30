@@ -5,7 +5,6 @@ import { Storage } from "../../firebase/index";
 import { Redirect } from "react-router";
 
 export default function CheckBook(props) {
-  const isLoggedIn = localStorage.hasOwnProperty("isAdminLoggedIn");
   const id = useRef(props.match.params.id);
   const [data, setData] = useState({});
   const [user, setUser] = useState({});
@@ -266,7 +265,7 @@ export default function CheckBook(props) {
           <div
             className="single-book-btns"
             style={{
-              display: !isLoggedIn ? "none" : "flex",
+              display: "flex",
               justifyContent: "space-around",
               marginTop: "3em",
             }}

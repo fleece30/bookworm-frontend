@@ -14,6 +14,9 @@ export default function Nav() {
   const { isAdmin } = useSelector((state) => state.user);
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      changeLoggedInStatus(false);
+    }
     document.addEventListener("scroll", (e) => {
       let scrolled = document.scrollingElement.scrollTop;
       if (scrolled >= 10) {
@@ -26,7 +29,7 @@ export default function Nav() {
       dispatch(loadUserThunk());
       dispatch(getCartThunk());
     }
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
@@ -43,6 +46,9 @@ export default function Nav() {
       </span>
       <div className="menu-links">
         <ul>
+          <li>
+            <NavLink to={"/collection"}>Browse</NavLink>
+          </li>
           <li
             style={{
               display: !JSON.parse(isLoggedIn) ? "none" : "inline-block",

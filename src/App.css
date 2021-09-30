@@ -37,3 +37,40 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   box-shadow: 0 0 0 30px white inset !important;
 }
+
+.btn-main {
+  color: white;
+  background: #4cc8ff;
+  border: none;
+  width: fit-content;
+  padding: 1em 0.9em;
+  font-weight: 500;
+  border-radius: 0.2em;
+  text-transform: uppercase;
+  transition: 0.3s all;
+}
+
+.btn-main:hover {
+  background: #00b3ff;
+}
+
+.btn-main:disabled {
+  background: #97e0ff;
+}
+
+.btn-sec {
+  color: #4cc8ff;
+  background: white;
+  border: 1px solid #4cc8ff;
+  width: fit-content;
+  padding: 1em 0.9em;
+  font-weight: 500;
+  border-radius: 0.2em;
+  text-transform: uppercase;
+  transition: 0.3s all;
+}
+
+.btn-sec:hover {
+  background: #00b3ff;
+  color: white;
+}

@@ -1,0 +1,31 @@
+.book-list-item {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2em;
+  img {
+    width: 10em;
+  }
+  .book-list-item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 1em;
+    .book-list-item-title {
+      font-weight: bold;
+    }
+    img {
+      width: 1.4em;
+      position: relative;
+      top: -0.1em;
+    }
+    button {
+      width: 15em;
+      border: 1px solid #ececec;
+    }
+    .book-action-btns {
+      display: flex;
+      flex-direction: row;
+      column-gap: 1em;
+    }
+  }
+}

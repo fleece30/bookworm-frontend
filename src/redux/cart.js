@@ -4,14 +4,23 @@ import axios from "axios";
 export const addToCartThunk = createAsyncThunk(
   "cart/addtocart",
   async (itemData) => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    if (token) {
+      config.headers["x-auth-token"] = token;
+    }
     const data = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/api/user/addtocart`,
       {
         userId: itemData.userId,
         book: itemData.book,
-      }
+      },
+      config
     );
-    console.log(data);
     return data.data.cart.length;
   }
 );
@@ -57,14 +66,24 @@ export const removeFromCartThunk = createAsyncThunk(
 export const issueWithTokenThunk = createAsyncThunk(
   "token/issuewithtoken",
   async (itemData) => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    if (token) {
+      config.headers["x-auth-token"] = token;
+    }
     const data = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/api/admin/issuewithtokens`,
       {
         userId: itemData.userId,
         books: itemData.books,
         date: new Date(),
-        totalPrice: itemData.totalPrice
-      }
+        totalPrice: itemData.totalPrice,
+      },
+      config
     );
     return data.data.tokenCount;
   }

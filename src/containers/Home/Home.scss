@@ -40,35 +40,6 @@ section {
       margin-bottom: 0.7em;
       width: 80%;
     }
-    .browse-collection {
-      color: white;
-      background: #4cc8ff;
-      border: none;
-      width: fit-content;
-      padding: 1em 0.9em;
-      font-weight: 500;
-      border-radius: 0.2em;
-      text-transform: uppercase;
-      transition: 0.3s all;
-      &:hover {
-        background: #00b3ff;
-      }
-    }
-    .sign-up {
-      color: #4cc8ff;
-      background: white;
-      border: 1px solid #4cc8ff;
-      width: 10em;
-      padding: 1em 0.9em;
-      font-weight: 500;
-      border-radius: 0.2em;
-      text-transform: uppercase;
-      transition: 0.3s all;
-      &:hover {
-        background: #00b3ff;
-        color: white;
-      }
-    }
   }
 
   &.about {

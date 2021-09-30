@@ -1,0 +1,93 @@
+.main-cart {
+  svg {
+    width: 30px;
+    display: inline-block;
+  }
+  .path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    &.circle {
+      -webkit-animation: dash 1.1s ease-in-out;
+      animation: dash 1.1s ease-in-out;
+    }
+    &.line {
+      stroke-dashoffset: 1000;
+      -webkit-animation: dash 1.1s 0.5s ease-in-out forwards;
+      animation: dash 1.1s 0.5s ease-in-out forwards;
+    }
+    &.check {
+      stroke-dashoffset: -100;
+      -webkit-animation: dash-check 1.1s 0.5s ease-in-out forwards;
+      animation: dash-check 1.1s 0.5s ease-in-out forwards;
+    }
+  }
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 25em;
+  overflow-x: hidden;
+  width: calc(100vw - 5px);
+  display: flex;
+  margin: auto;
+  column-gap: 5em;
+
+  .checkout {
+    margin-top: 2em;
+    position: relative;
+    left: 80%;
+    width: fit-content;
+    button {
+      width: 8em;
+      margin: 1em auto;
+    }
+  }
+  .cart-items {
+    .empty-cart {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      img {
+        width: 40%;
+        margin: auto;
+      }
+    }
+  }
+}
+
+.preview-panel {
+  position: relative;
+  top: 0;
+  .preview {
+    // position: fixed;
+    padding: 0 2em;
+    h1 {
+      font-family: "Italianno", cursive;
+      text-transform: capitalize;
+      text-align: center;
+      margin-top: 0;
+    }
+    .book-information {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      column-gap: 2em;
+      padding: 2em 0;
+      ul {
+        padding: 0 !important;
+      }
+      .info {
+        p {
+          text-align: justify;
+          font-size: 1.1em;
+        }
+        .vert-line {
+          display: inline-block;
+          min-width: 2px !important;
+          height: 2em;
+          background-color: #b8b8b8;
+        }
+      }
+    }
+  }
+}

@@ -125,6 +125,15 @@ export default function DonateBook() {
             .getDownloadURL()
             .then((url) => {
               const userId = user.data._id;
+              const token = localStorage.getItem("token");
+              const config = {
+                headers: {
+                  "Content-type": "application/json",
+                },
+              };
+              if (token) {
+                config.headers["x-auth-token"] = token;
+              }
               axios
                 .post(`${process.env.REACT_APP_BASE_URL}/api/books/addBook`, {
                   book_img_url: url,
@@ -153,7 +162,8 @@ export default function DonateBook() {
                       {
                         book: res.data._id,
                         id: userId,
-                      }
+                      },
+                      config
                     )
                     .then((res) => console.log(res))
                     .catch((err) => console.log(err));

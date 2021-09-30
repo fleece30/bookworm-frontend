@@ -79,7 +79,9 @@ export default function Home() {
                 textDecoration: "none",
               }}
             >
-              <button className="browse-collection">Browse the library</button>
+              <button className="browse-collection btn-main">
+                Browse the library
+              </button>
             </Link>
             <Link
               to="/signup"
@@ -89,7 +91,7 @@ export default function Home() {
             >
               <button
                 style={{ display: JSON.parse(isLoggedIn) ? "none" : "block" }}
-                className="sign-up"
+                className="sign-up btn-sec"
               >
                 Sign up
               </button>
