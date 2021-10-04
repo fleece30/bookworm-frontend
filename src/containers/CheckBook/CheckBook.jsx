@@ -45,6 +45,15 @@ export default function CheckBook(props) {
     if (redirect) {
       return <Redirect to="/" />;
     }
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    if (token) {
+      config.headers["x-auth-token"] = token;
+    }
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/books/bookInfo/${id.current}`)
       .then(({ data }) => {
@@ -54,14 +63,16 @@ export default function CheckBook(props) {
         setDesc(data.description);
         setLength(data["length"]);
         setData({ ...data });
+        console.log(data.donatedBy);
         axios
           .post(
             `${process.env.REACT_APP_BASE_URL}/api/admin/getuserbyusername`,
             {
               username: data.donatedBy,
-            }
+            },
+            config
           )
-          .then(({ data }) => setUser({ ...data[0] }))
+          .then(({ data }) => setUser({ ...data }))
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));

@@ -74,3 +74,23 @@ input:-webkit-autofill:active {
   background: #00b3ff;
   color: white;
 }
+
+input,
+textarea {
+  width: 100%;
+  margin: 12px 0;
+  font-weight: 600;
+  padding: 8px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #b2bec3;
+  transition: border 0.5s;
+  &::placeholder {
+    color: #b2bec3;
+  }
+  &:focus {
+    border-bottom: 1px solid #353b48;
+    transition: border 0.5s;
+  }
+}

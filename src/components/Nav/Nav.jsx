@@ -42,7 +42,7 @@ export default function Nav() {
           color: "black",
         }}
       >
-        <NavLink to={"/home"}>BOOKWORM</NavLink>
+        <NavLink to={"/home"}>KITAABAE</NavLink>
       </span>
       <div className="menu-links">
         <ul>

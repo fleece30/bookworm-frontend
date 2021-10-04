@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Route, Switch } from "react-router";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -11,8 +11,9 @@ import Library from "./containers/Library/Library";
 import Profile from "./containers/Profile/Profile";
 import DonateBook from "./containers/DonateBook/DonateBook";
 import Signup from "./containers/Signup/Signup";
+import ResetPassword from './containers/ResetPassword/ResetPassword'
+import ReturnBooks from "./containers/ReturnBooks/ReturnBooks";
 // import BooksByCategory from "./containers/BooksByCategory/BooksByCategory";
-// import ResetPassword from "./containers/ResetPassword/ResetPassword";
 import Cart from "./containers/Cart/Cart";
 
 function App() {
@@ -29,23 +30,17 @@ function App() {
           <Route path="/signup" component={Signup} />
           <>
             <Nav />
-            {/* <div style={{ minHeight: "30px" }}></div> */}
             <Route exact path={["/home", "/"]} component={Home} />
             <ProtectedRoute exact path="/adminhome" component={AdminHome} />
             <Route path="/donate" component={DonateBook} />
             <Route path="/collection" component={Library} />
             <Route path="/cart" component={Cart} />
             <Route path="/profile" component={Profile} />
+            <Route path="/returnbooks" component={ReturnBooks} />
             <Route exact path="/checkbook/:id" component={CheckBook} />
-            {/*<Route path="/search" component={SearchBooks} />
-            <Route path="/profile" component={Profile} />
-            
-            <Route path="/book/:id" component={SingleBook} />
-            <Route path="/books/:length" component={BookByLen} />
-            <Route path="/cart" component={Cart} />
             <Route path="/resetpassword/:token" component={ResetPassword} />
             <Route exact path="/resetpassword" component={ResetPassword} />
-            <Route
+            {/* <Route
               exact
               path="/category/:category"
               component={BooksByCategory}

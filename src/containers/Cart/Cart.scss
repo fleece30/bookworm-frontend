@@ -1,4 +1,6 @@
 .main-cart {
+  width: 50%;
+  margin: 0 auto;
   svg {
     width: 30px;
     display: inline-block;
@@ -26,9 +28,9 @@
 .cart-container {
   display: flex;
   flex-direction: column;
-  padding: 0 25em;
+  // padding: 0 25em;
   overflow-x: hidden;
-  width: calc(100vw - 5px);
+  // width: calc(100vw - 5px);
   display: flex;
   margin: auto;
   column-gap: 5em;

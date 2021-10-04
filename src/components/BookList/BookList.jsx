@@ -8,6 +8,7 @@ export default function BookList(props) {
       <img
         src={props.item.url || props.item.book_img_url}
         alt={props.item.book_name}
+        className="book_img"
         // style={{ width: "fit-content" }}
       />
       <div className="book-list-item-info">
@@ -27,17 +28,19 @@ export default function BookList(props) {
               <img
                 src={`${process.env.PUBLIC_URL}/images/token-icon.png`}
                 alt=""
+                
               />
               &nbsp;{props.item.tokenValue}
             </span>
           </div>
         </div>
-        <div className="book-action-btns">
+      </div>
+      <div className="book-action-btns">
           <Link to={{ pathname: `/collection`, id: props.item._id }}>
-            <button className="btn btn-secondary">More Information</button>
+            <button className="btn-link">More Information</button>
           </Link>
           <button
-            className="btn btn-secondary"
+            className="btn-link"
             onClick={() =>
               props.removeFromCart(props.item.id || props.item._id)
             }
@@ -46,7 +49,6 @@ export default function BookList(props) {
             Remove from cart
           </button>
         </div>
-      </div>
     </div>
   );
 }

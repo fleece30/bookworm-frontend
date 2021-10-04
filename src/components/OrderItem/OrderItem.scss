@@ -1,0 +1,13 @@
+.order-container {
+  // border: 1px solid #ffffff;
+  margin-bottom: 1em;
+  .alert {
+    margin: 0;
+  }
+  .orderList {
+    padding: 0 2em;
+    & > :last-child .book-list-item {
+      border-bottom: none;
+    }
+  }
+}

@@ -203,13 +203,7 @@ export default function Cart(props) {
                   {cart.map((item, key) => {
                     totalPrice += item.tokenValue;
                     return (
-                      <li
-                        key={key}
-                        style={{
-                          borderBottom: "1px solid #ececec",
-                          padding: "1em 0",
-                        }}
-                      >
+                      <li key={key}>
                         <BookList
                           item={item}
                           removeFromCart={removeFromCart}

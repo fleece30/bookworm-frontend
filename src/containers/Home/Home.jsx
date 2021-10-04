@@ -68,7 +68,8 @@ export default function Home() {
     <div>
       <section>
         <div className="intro">
-          <h1 className="title">BOOKWORM</h1>
+          {/* <span style={{color: "white", background: "#ffa31a", padding: "1px 12px", fontSize: "1em", borderRadius: "20px", marginLeft: "5px"}}>BAE</span> */}
+          <h1 className="title">KITAABAE</h1>
           <span>
             Rent and Donate books and share the joy of reading with the world!
           </span>
@@ -84,16 +85,13 @@ export default function Home() {
               </button>
             </Link>
             <Link
-              to="/signup"
+              to={JSON.parse(isLoggedIn) ? "returnbooks" : "/signup"}
               style={{
                 textDecoration: "none",
               }}
             >
-              <button
-                style={{ display: JSON.parse(isLoggedIn) ? "none" : "block" }}
-                className="sign-up btn-sec"
-              >
-                Sign up
+              <button className="sign-up btn-sec">
+                {JSON.parse(isLoggedIn) ? "Return Books" : "Sign up"}
               </button>
             </Link>
           </div>
@@ -118,7 +116,7 @@ export default function Home() {
           alt="landing-reading"
         />
       </section>
-      <section style={{ background: "#E6F7FF" }} className="about">
+      <section className="about">
         <div className="quote-div">
           <div className="quote">"&nbsp;{quotes[randInt].quote}&nbsp;"</div>
           <div className="by">&#65123;&nbsp;{quotes[randInt].by}</div>

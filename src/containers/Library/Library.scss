@@ -9,6 +9,16 @@ h1 {
     .items {
       width: 45%;
       // overflow-y: scroll;
+      .all-books-container {
+        display: flex;
+        padding: 1em 0;
+        flex-wrap: wrap;
+        column-gap: 1em;
+        justify-content: flex-start;
+        margin: 0 auto;
+        row-gap: 1.3em;
+        width: 100%;
+      }
     }
   }
   .items {
@@ -72,11 +82,11 @@ h1 {
       }
     }
     .all-books-container {
-      display: flex;
-      padding: 1em 0;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      row-gap: 1.3em;
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
+      column-gap: 2em;
+      row-gap: 3em;
     }
   }
   .preview-panel {

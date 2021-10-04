@@ -116,7 +116,7 @@ function Login() {
               {loginBtnText}
             </button>
             <div style={{ marginTop: "30px", textAlign: "center" }}>
-              New to Bookworm?{" "}
+              New to Kitaabe?{" "}
               <Link to={"/signup"} style={{ color: "#636e72" }}>
                 Sign Up Here
               </Link>

@@ -208,7 +208,12 @@ export default function Library(props) {
           <div style={{ display: "flex", columnGap: "2em" }}>
             <button
               className="btn-search btn-main"
-              style={{ width: "10em" }}
+              style={{
+                width:
+                  searchTerm === "" && queryTags.length === 0
+                    ? "fit-content"
+                    : "10em",
+              }}
               onClick={async (e) => {
                 try {
                   client
@@ -226,7 +231,9 @@ export default function Library(props) {
                 }
               }}
             >
-              Search
+              {searchTerm === "" && queryTags.length === 0
+                ? "Show All Books"
+                : "Search"}
             </button>
             <button
               className="btn-clear btn-sec"

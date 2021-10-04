@@ -35,11 +35,13 @@
     ul {
       padding: 0;
       li {
+        font-size: 1em;
         padding: 0.7em 0;
         width: fit-content;
         position: relative;
         transition: 1s all;
         cursor: pointer;
+        font-weight: 500;
         span {
           position: relative;
           left: 0;
@@ -59,7 +61,7 @@
         }
         &:hover,
         &.active {
-          color: #7a8586;
+          color: #5c5c5c;
           & > span {
             left: 3.5em;
           }
@@ -71,7 +73,28 @@
       }
     }
   }
-  .profile {
-    background-color: black;
+  .error {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #d63031;
+    cursor: default;
   }
+}
+
+.pass-modal {
+  display: flex;
+  flex-direction: column;
+  padding: 3em 10em;
+  background: white;
+  border-radius: 1em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  border: 1px solid rgb(100, 100, 100);
+  box-shadow: 24;
 }
