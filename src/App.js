@@ -11,7 +11,7 @@ import Library from "./containers/Library/Library";
 import Profile from "./containers/Profile/Profile";
 import DonateBook from "./containers/DonateBook/DonateBook";
 import Signup from "./containers/Signup/Signup";
-import ResetPassword from './containers/ResetPassword/ResetPassword'
+import ResetPassword from "./containers/ResetPassword/ResetPassword";
 import ReturnBooks from "./containers/ReturnBooks/ReturnBooks";
 // import BooksByCategory from "./containers/BooksByCategory/BooksByCategory";
 import Cart from "./containers/Cart/Cart";
@@ -26,14 +26,15 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
           <>
             <Nav />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
             <Route exact path={["/home", "/"]} component={Home} />
             <ProtectedRoute exact path="/adminhome" component={AdminHome} />
             <Route path="/donate" component={DonateBook} />
-            <Route path="/collection" component={Library} />
+            <Route exact path="/collection" component={Library} />
+            <Route path="/collection/:category" component={Library} />
             <Route path="/cart" component={Cart} />
             <Route path="/profile" component={Profile} />
             <Route path="/returnbooks" component={ReturnBooks} />

@@ -44,8 +44,22 @@ function Login() {
   }
   return (
     <div>
+      <svg
+        className="login_svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920.002 879.166"
+      >
+        <path
+          id="Path_1"
+          data-name="Path 1"
+          d="M0,226.154S598.462,103.077,830.77,416.924s401.539,372.308,646.154,418.462S1920,1021.54,1920,1021.54v60H0Z"
+          transform="translate(0 -202.374)"
+          fill="#CFF0FF"
+        />
+      </svg>
+
       <div className="login-container">
-        <div className="intro">
+        {/* <div className="intro">
           <div className="img-container">
             <img
               src={`${process.env.PUBLIC_URL}/images/login-image.webp`}
@@ -64,9 +78,9 @@ function Login() {
               cupiditate dolore ipsa.
             </p>
           </div>
-        </div>
+        </div> */}
         <div className="login-form">
-          <h2>Login</h2>
+          <h4>Login</h4>
           <div className="underline"></div>
           <div className="form">
             <div style={{ display: "flex", position: "relative" }}>

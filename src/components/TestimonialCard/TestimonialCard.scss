@@ -1,0 +1,45 @@
+.main-card {
+  width: 300px;
+  height: 400px;
+  box-shadow: 2px 2px 15px rgb(243, 243, 243), -2px -2px 15px rgb(243, 243, 243);
+  background: white;
+  position: relative;
+  border-radius: 1em;
+  padding: 2em 3em;
+  .quote-pic {
+    position: absolute;
+    bottom: 27%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8em;
+    height: 8em;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-clip: padding-box;
+    background-size: auto 8em;
+  }
+  .quote-name {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+  }
+  .who-they-are {
+    position: absolute;
+    text-align: center;
+    top: 82%;
+    left: 50%;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: rgb(116, 116, 116);
+    transform: translateX(-50%);
+  }
+  .path {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+  }
+}

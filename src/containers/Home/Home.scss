@@ -1,64 +1,131 @@
-section {
-  height: 100vh;
-  margin-left: -40px;
-  width: calc(100vw - 5px);
-  .landing-reading {
-    width: 40%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+.home-container {
+  section {
+    height: calc(100vh - 63px);
+    margin-left: -40px;
+    width: calc(100vw - 5px);
+    scroll-snap-align: start;
+    margin-bottom: 2em;
+    .landing-reading {
+      width: 40%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
 
-  .landing-main-bg {
-    width: 70%;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+    .landing-main-bg {
+      width: 70%;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
 
-  .intro {
+    .intro {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 30%;
+      left: 5%;
+      z-index: 100;
+      width: 50%;
+      .title {
+        font-family: "Lora", serif;
+        font-size: 7em;
+        color: rgb(19, 19, 19);
+      }
+      h1 {
+        margin-left: 0;
+      }
+      span {
+        font-family: "Lora", serif;
+        font-size: 1.5em;
+        color: rgb(19, 19, 19);
+        margin-bottom: 0.7em;
+        width: 80%;
+      }
+    }
+
+    &.about {
+      display: grid;
+      position: relative;
+      grid-template-columns: 50% 50%;
+      & svg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      .testimonial-cards {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        display: flex;
+        column-gap: 5em;
+      }
+      .about-head {
+        width: calc(100vw - 5px);
+        height: auto;
+        margin-top: 1em;
+        text-align: center;
+        font-size: 3em;
+        font-family: "Roboto";
+      }
+      .quote-div {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 2em 4em;
+        font-family: "Lora", serif;
+        .quote {
+          font-size: 3.5em;
+          font-weight: bold;
+          animation: quote 1s linear 0s 1 forwards;
+        }
+        .by {
+          font-size: 2em;
+          font-style: italic;
+        }
+      }
+      .about-us {
+        .who-we-are {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+          position: relative;
+          img {
+            width: 40%;
+            height: auto;
+            margin: 0 auto;
+            // position: absolute;
+            // left: 50%;
+            // transform: translateX(-50%);
+          }
+          .who-we-are-intro {
+            font-size: 1.3em;
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    &.category-section {
+      margin-top: 7em;
+    }
+  }
+  .footer {
+    background: #2f3640;
+    height: 400px;
+    margin-left: -40px;
+    width: calc(100vw - 5px);
+    margin-bottom: -56px;
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 30%;
-    left: 5%;
-    z-index: 100;
-    width: 50%;
-    .title {
-      font-family: "Lora", serif;
-      font-size: 7em;
-      color: rgb(19, 19, 19);
-    }
-    h1 {
-      margin-left: 0;
-    }
-    span {
-      font-family: "Lora", serif;
-      font-size: 1.5em;
-      color: rgb(19, 19, 19);
-      margin-bottom: 0.7em;
-      width: 80%;
-    }
-  }
-
-  &.about {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center;
-    column-gap: 3em;
-    .quote-div {
-      padding: 2em 4em;
-      font-family: "Lora", serif;
-      .quote {
-        font-size: 3.5em;
-        font-weight: bold;
-        animation: quote 1s linear 0s 1 forwards;
-      }
-      .by {
-        font-size: 2em;
-        font-style: italic;
-      }
+    padding: 3em 2em;
+    img {
+      width: 120px;
     }
   }
 }

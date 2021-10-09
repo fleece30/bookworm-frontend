@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { gql, useApolloClient } from "@apollo/client";
 import BookCard from "../../components/BookCard/bookCard";
@@ -45,6 +46,7 @@ export default function Library(props) {
   const [inSaved, setInSaved] = useState(false);
   const [btnText, setBtnText] = useState("");
   const [isPreviewActive, setPreviewActive] = useState(false);
+  const [fromCategory, setfromCategory] = useState(false);
   const { user } = useSelector((state) => state.user);
   const id = useRef("");
   const scrollYValue = useRef(0);
@@ -73,24 +75,44 @@ export default function Library(props) {
   ];
 
   useEffect(() => {
-    if (props.location.id !== null && props.location.id !== undefined) {
+    window.scrollTo(0, 0);
+    if (Object.keys(props.match.params).length !== 0) {
+      setfromCategory(true);
+      try {
+        client
+          .query({
+            query: SEARCH_QUERY,
+            variables: {
+              queryTags: [props.match.params.category],
+              searchTerm,
+            },
+          })
+          .then(({ data }) => {
+            setBooks([...data.books_search]);
+          });
+        setshowSearched(true);
+      } catch (e) {
+        console.log(e);
+      }
+    } else if (props.location.id !== null && props.location.id !== undefined) {
       id.current = props.location.id;
       getBookInfo();
       setPreviewActive(true);
+    } else {
+      try {
+        client
+          .query({
+            query: BOOK_QUERY,
+          })
+          .then(({ data }) => {
+            setBooks([...data.books]);
+          });
+      } catch (e) {
+        console.log(e);
+      }
     }
     dispatch(loadUserThunk());
     if (books.length === 0 && showSearched) return;
-    try {
-      client
-        .query({
-          query: BOOK_QUERY,
-        })
-        .then(({ data }) => {
-          setBooks([...data.books]);
-        });
-    } catch (e) {
-      console.log(e);
-    }
   }, [client]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const addTag = (item) => {
@@ -235,19 +257,28 @@ export default function Library(props) {
                 ? "Show All Books"
                 : "Search"}
             </button>
-            <button
-              className="btn-clear btn-sec"
-              style={{ width: "10em" }}
-              onClick={() => {
-                setshowSearched(false);
-                setQueryTags([]);
-                setSearchTerm("");
-              }}
-            >
-              Clear
-            </button>
+            <Link to={"/collection"}>
+              <button
+                className="btn-clear btn-sec"
+                style={{ width: "10em" }}
+                onClick={() => {
+                  setshowSearched(false);
+                  setQueryTags([]);
+                  setSearchTerm("");
+                }}
+              >
+                Clear
+              </button>
+            </Link>
           </div>
           {/* {getAllBooks()} */}
+          {fromCategory ? (
+            <h4 style={{ margin: "1.2em 0" }}>
+              {props.match.params.category} books
+            </h4>
+          ) : (
+            ""
+          )}
           <div className="all-books-container">
             {books === undefined || books.length === 0 ? (
               showSearched ? (

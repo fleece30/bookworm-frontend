@@ -119,8 +119,21 @@ export default function Signup() {
   };
   return (
     <div>
+      <svg
+        className="reg_svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1921.541 1083.078"
+      >
+        <path
+          id="Path_1"
+          data-name="Path 1"
+          d="M1763.079,0s-210.769,16.923-433.847,360S963.078,638.462,586.154,753.847,0,1024.616,0,1024.616v58.462H1921.541V0Z"
+          fill="#CFF0FF"
+        />
+      </svg>
+
       <div className="signup-container">
-        <div className="intro">
+        {/* <div className="intro">
           <div className="img-container">
             <img
               src={`${process.env.PUBLIC_URL}/images/signup-image.webp`}
@@ -139,9 +152,9 @@ export default function Signup() {
               cupiditate dolore ipsa.
             </p>
           </div>
-        </div>
+        </div> */}
         <div className="reg-form">
-          <h2>Sign Up</h2>
+          <h4>Sign Up</h4>
           <div className="underline"></div>
           <div className="form">
             <div style={{ display: "flex", position: "relative" }}>
@@ -259,7 +272,7 @@ export default function Signup() {
             className="otpInput"
             style={{
               display: showOtpField ? "flex" : "none",
-              //   display: "flex",
+              margin: "0 auto",
               marginTop: "1em",
               flexDirection: "column",
               rowGap: "1em",

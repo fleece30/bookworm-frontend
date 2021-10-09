@@ -12,6 +12,7 @@ export default function ResetPassword(props) {
   const [isSent, setSent] = useState(false);
   const [isErr, setErr] = useState(false);
   const [counter, setCounter] = useState(5);
+  const [validToken, setvalidToken] = useState(true);
   const timer = useRef();
   const [counterPaused, setPause] = useState(true);
 
@@ -41,6 +42,19 @@ export default function ResetPassword(props) {
   };
 
   useEffect(() => {
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/api/user/checktoken`, {
+        token: props.match.params.token,
+      })
+      .then((data) => {
+        setvalidToken(true);
+        console.log(data);
+      })
+      .catch((err) => {
+        setvalidToken(false);
+        console.log(err);
+      });
+    console.log(fromEmail.current);
     if (!counterPaused) {
       timer.current = setInterval(decreaseCount, 1000);
     }
@@ -67,71 +81,76 @@ export default function ResetPassword(props) {
   };
 
   if (fromEmail.current) {
-    return (
-      <div className="reset-pass-container">
-        <div className="new-password-form">
-          <h4>Set New Password</h4>
-          <span>
-            Please enter your new password twice. Make sure it is complex to
-            ensure security.
-          </span>
-          <input
-            type="password"
-            placeholder="Enter new password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div style={{ display: "flex", position: "relative" }}>
+    if (!validToken) {
+      return <div>Your token is invalid</div>;
+    } else {
+      return (
+        <div className="reset-pass-container">
+          <div className="new-password-form">
+            <h4>Set New Password</h4>
+            <span>
+              Please enter your new password twice. Make sure it is complex to
+              ensure security.
+            </span>
             <input
               type="password"
-              placeholder="Confirm Password"
-              onChange={(e) => setConPassword(e.target.value)}
+              placeholder="Enter new password"
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <span
-              className="error"
-              style={{
-                display:
-                  conPassword === "" || conPassword === password
-                    ? "none"
-                    : "block",
-              }}
-              data-tip
-              data-for="passTip"
+            <div style={{ display: "flex", position: "relative" }}>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                onChange={(e) => setConPassword(e.target.value)}
+              />
+              <span
+                className="error"
+                style={{
+                  display:
+                    conPassword === "" || conPassword === password
+                      ? "none"
+                      : "block",
+                }}
+                data-tip
+                data-for="passTip"
+              >
+                &#33;
+              </span>
+            </div>
+            <button
+              className="btn btn-secondary"
+              disabled={password !== conPassword || password === ""}
+              onClick={() => savePassword()}
             >
-              &#33;
-            </span>
-          </div>
-          <button
-            className="btn btn-secondary"
-            disabled={password !== conPassword || password === ""}
-            onClick={() => savePassword()}
-          >
-            Set Password
-          </button>
-          <div
-            className="alert alert-dismissible alert-danger"
-            style={{
-              display: isFailure ? "block" : "none",
-              padding: "1em 2em",
-            }}
-          >
-            <strong>There was some error!</strong>
-            <br /> Please try entering the passwords again and if that doesn't
-            work, go through the reset process again. We're sorry for the
-            inconvinience.
-          </div>
-          <div
-            className="alert alert-dismissible alert-success"
-            style={{
-              display: isSuccess ? "block" : "none",
-              padding: "1em 2em",
-            }}
-          >
-            <strong>Password changed successfully!</strong>
-            <br /> You will be redirected to the login page in {counter} seconds
+              Set Password
+            </button>
+            <div
+              className="alert alert-dismissible alert-danger"
+              style={{
+                display: isFailure ? "block" : "none",
+                padding: "1em 2em",
+              }}
+            >
+              <strong>There was some error!</strong>
+              <br /> Please try entering the passwords again and if that doesn't
+              work, go through the reset process again. We're sorry for the
+              inconvinience.
+            </div>
+            <div
+              className="alert alert-dismissible alert-success"
+              style={{
+                display: isSuccess ? "block" : "none",
+                padding: "1em 2em",
+              }}
+            >
+              <strong>Password changed successfully!</strong>
+              <br /> You will be redirected to the login page in {counter}{" "}
+              seconds
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   } else {
     return (
       <div className="reset-pass-container">

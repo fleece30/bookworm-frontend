@@ -83,7 +83,7 @@ h1 {
     }
     .all-books-container {
       display: grid;
-      justify-content: center;
+      // justify-content: center;
       grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
       column-gap: 2em;
       row-gap: 3em;
