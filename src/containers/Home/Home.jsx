@@ -263,7 +263,7 @@ export default function Home() {
             </div>
           </div>
         </div> */}
-        <div className="about-head">
+        <div className="testimonial-head">
           <p>Regarding books, from the wise!</p>
         </div>
         <div className="testimonial-cards">
@@ -294,12 +294,66 @@ export default function Home() {
           })}
         </div>
       </section>
-      <section className="pricing">a</section>
+      {/* <section className="pricing">a</section> */}
       <div className="footer">
-        <img
-          src={`${process.env.PUBLIC_URL}/images/kitaabae_logo.svg`}
-          alt=""
-        />
+        <div className="links">
+          <div>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/kitaabae_logo.svg`}
+              alt=""
+            />
+            <div className="social">
+              <a
+                href="https://www.instagram.com/kitaabaeofficial/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://medium.com/@kitaabae"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="fab fa-medium-m"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/abhishek-yadav-a56b6385/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+
+          <div className="contact-us">
+            <p>Contact Us</p>
+            <ul>
+              <li>
+                <i className="fal fa-envelope"></i>&nbsp;&nbsp;
+                <a href="mailto:abhishek@kitaabae.com">abhishek@kitaabae.com</a>
+              </li>
+              <li>
+                <i className="fal fa-phone"></i>&nbsp;&nbsp;+91-8708169951
+              </li>
+            </ul>
+          </div>
+
+          <div className="about-us">
+            <p style={{ fontSize: "1.2em" }}>What is Kitaabae?</p>
+            <p>
+              I have always found books to be a doorway to faraway worlds; some
+              lively and beautiful, some bleak and dystopian. They put us in the
+              shoes of a hero on a quest to Mount Doom, of people who have
+              overcome insurmountable odds to achieve greatness, of people who
+              have seen the world wither but who still fight for it. I want to
+              share these journeys with as many people as I can and Kitaabae is
+              a small step in that direction.
+            </p>
+          </div>
+        </div>
+        <div className="cr">Designed and Developed by Abhishek Yadav</div>
       </div>
     </div>
   );

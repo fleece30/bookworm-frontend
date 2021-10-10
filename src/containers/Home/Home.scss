@@ -64,7 +64,7 @@
         display: flex;
         column-gap: 5em;
       }
-      .about-head {
+      .testimonial-head {
         width: calc(100vw - 5px);
         height: auto;
         margin-top: 1em;
@@ -116,16 +116,68 @@
     }
   }
   .footer {
-    background: #2f3640;
+    background: #1d1a1a;
+    color: #c2c2c2;
     height: 400px;
     margin-left: -40px;
     width: calc(100vw - 5px);
     margin-bottom: -56px;
     display: flex;
     flex-direction: column;
-    padding: 3em 2em;
-    img {
-      width: 120px;
+    padding: 3em 15em;
+    .links {
+      margin: auto 0;
+      display: grid;
+      grid-template-columns: 30% 30% 30%;
+      justify-content: space-evenly;
+      position: relative;
+      img {
+        position: relative;
+        // left: 50%;
+        // transform: translateX(-50%);
+        width: 150px;
+      }
+      .social {
+        margin-top: 2em;
+        font-size: 1.5em;
+        display: flex;
+        // justify-content: center;
+        column-gap: 2em;
+        a {
+          text-decoration: none;
+          color: #c2c2c2;
+          transition: 0.3s all;
+          &:hover {
+            color: rgb(255, 255, 255);
+          }
+        }
+      }
+      .contact-us {
+        // margin: 0 auto;
+        font-style: italic;
+        p {
+          font-size: 1.2em;
+        }
+        ul {
+          padding-left: 0;
+          li {
+            margin: 1em 0;
+            a {
+              text-decoration: none;
+              color: #c2c2c2;
+              z-index: 10;
+            }
+          }
+        }
+      }
+      .about-us {
+        font-style: italic;
+      }
+    }
+    .cr {
+      border-top: 1px solid #c2c2c2;
+      padding: 1em;
+      text-align: right;
     }
   }
 }

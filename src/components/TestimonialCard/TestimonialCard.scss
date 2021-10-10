@@ -1,11 +1,12 @@
 .main-card {
   width: 300px;
   height: 400px;
-  box-shadow: 2px 2px 15px rgb(243, 243, 243), -2px -2px 15px rgb(243, 243, 243);
+  box-shadow: 2px 2px 80px rgb(243, 243, 243), -2px -2px 80px rgb(243, 243, 243);
   background: white;
   position: relative;
   border-radius: 1em;
   padding: 2em 3em;
+  text-align: center;
   .quote-pic {
     position: absolute;
     bottom: 27%;
