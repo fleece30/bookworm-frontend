@@ -332,8 +332,8 @@ export default function Library(props) {
                     }}
                   >
                     <h5>
-                      What {user !== null ? user.data.username : ""} thinks
-                      about the book:{" "}
+                      What {user !== null ? data.donatedBy : ""} thinks about
+                      the book:{" "}
                     </h5>
                     <p>{data.thoughts}</p>
                   </div>
