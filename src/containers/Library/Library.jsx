@@ -331,10 +331,7 @@ export default function Library(props) {
                       display: data.thoughts.length > 0 ? "block" : "none",
                     }}
                   >
-                    <h5>
-                      What {user !== null ? data.donatedBy : ""} thinks about
-                      the book:{" "}
-                    </h5>
+                    <h5>What {data.donatedBy} thinks about the book: </h5>
                     <p>{data.thoughts}</p>
                   </div>
                   <div
